@@ -217,9 +217,104 @@ Phase 1 defused. How about the next one?
 That's number 2.  Keep going!
 ```
 
+```
+void phase_3(char *param_1)
 
+{
+  int iVar1;
+  char cVar2;
+  uint nbr1;
+  char character;
+  int nbr2;
+  
+  iVar1 = sscanf(param_1,"%d %c %d",&nbr1,&character,&nbr2);
+  if (iVar1 < 3) 
+  {
+    explode_bomb();
+  }
+  switch(nbr1) 
+  {
+    case 0:
+      cVar2 = 'q';
+      if (nbr2 != 777) 
+      {
+        explode_bomb();
+      }
+      break;
+    case 1:
+      cVar2 = 'b';
+      if (nbr2 != 214) 
+      {
+        explode_bomb();
+      }
+      break;
+    case 2:
+      cVar2 = 'b';
+      if (nbr2 != 755) 
+      {
+        explode_bomb();
+      }
+      break;
+    case 3:
+      cVar2 = 'k';
+      if (nbr2 != 251) 
+      {
+        explode_bomb();
+      }
+      break;
+    case 4:
+      cVar2 = 'o';
+      if (nbr2 != 160) {
+        explode_bomb();
+      }
+      break;
+    case 5:
+      cVar2 = 't';
+      if (nbr2 != 458) 
+      {
+        explode_bomb();
+      }
+      break;
+    case 6:
+      cVar2 = 'v';
+      if (nbr2 != 780) 
+      {
+        explode_bomb();
+      }
+      break;
+    case 7:
+      cVar2 = 'b';
+      if (nbr2 != 524) 
+      {
+        explode_bomb();
+      }
+      break;
+    default:
+      cVar2 = 'x';
+      explode_bomb();
+  }
+  if (cVar2 != character) 
+  {
+    explode_bomb();
+  }
+  return;
+}
+```
 
+```
+laurie@BornToSecHackMe:~$ cat payload
+Public speaking is very easy.
+1 2 6 24 120 720
+7 b 524
 
+laurie@BornToSecHackMe:~$ ./bomb payload
+Welcome this is my little bomb !!!! You have 6 stages with
+only one life good luck !! Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+
+```
 
 
 
