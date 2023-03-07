@@ -45,7 +45,7 @@ o
 4
 
 laurie@BornToSecHackMe:~$ file bomb
-bomb: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.0.0, not stripped
+bomb: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV)
 ```
 
 
