@@ -316,7 +316,42 @@ Halfway there!
 
 ```
 
+```
+void phase_4(char *param_1)
+{
+  int ret;
+  int inputNbr;
+  
+  ret = sscanf(param_1,"%d",&inputNbr);
+  if ((ret != 1) || (inputNbr < 1))
+    explode_bomb();
+  
+  ret = func4(inputNbr);
+  if (ret != 55)
+    explode_bomb();
+  
+  return;
+}
 
+
+int func4(int input)
+{
+  int i;
+  int ret;
+  
+  if (input < 2)
+    ret = 1;
+  
+  else 
+  {
+    i = func4(input - 1);
+    ret = func4(input - 2);
+    ret = ret + i;
+  }
+ 
+  return ret;
+}
+```
 
 
 
