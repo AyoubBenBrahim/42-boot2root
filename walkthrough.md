@@ -356,7 +356,61 @@ int func4(int input)
 }
 ```
 
+```
+#include<stdio.h>
 
+int func4(int input)
+{
+  int i;
+  int ret;
+  
+  if (input < 2)
+    ret = 1;
+  
+  else 
+  {
+    i = func4(input - 1);
+    ret = func4(input - 2);
+    ret = ret + i;
+  }
+ 
+  return ret;
+}
+
+int main()
+{
+    for (int i = 1; i<=100; i++)
+    {
+        printf("res{%d} =  %d\n", i, func4(i));
+        if(func4(i) == 55)
+            break;
+    }
+    return (0);
+}
+
+    
+    res{1} =  1
+    res{2} =  2
+    res{3} =  3
+    res{4} =  5
+    res{5} =  8
+    res{6} =  13
+    res{7} =  21
+    res{8} =  34
+    res{9} =  55
+```
+
+```
+laurie@BornToSecHackMe:~$ echo "9" >> payload
+
+laurie@BornToSecHackMe:~$ ./bomb payload
+Welcome this is my little bomb !!!! You have 6 stages with
+only one life good luck !! Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+So you got that one.  Try this one.
+```
 
 
 
