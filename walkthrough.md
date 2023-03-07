@@ -140,26 +140,136 @@ Phase 1 defused. How about the next one?
    0x08048b60 <+24>:	add    $0x10,%esp
    0x08048b63 <+27>:	cmpl   $0x1,-0x18(%ebp)
 
- prepare the parameters to call the function read_six_numbers, which reads six integers from standard input and stores them in an array. The first parameter is the address of the local variable just loaded into the eax register, and the second parameter is the value in the edx register, which is the first parameter passed to the function.
+ prepare the parameters to call the function read_six_numbers, 
+ which reads six integers from standard input and stores them in an array. 
+ The first parameter is the address of the local variable just loaded into the eax register, 
+ and the second parameter is the value in the edx register, which is the first parameter passed to the function.
 
-The instruction cmpl $0x1,-0x18(%ebp) is comparing the value at memory address %ebp-0x18 with 0x1. This value is one of the parameters passed to the function read_six_numbers.
+The instruction cmpl $0x1,-0x18(%ebp) is comparing the value at memory address %ebp-0x18 with 0x1.
+This value is one of the parameters passed to the function read_six_numbers.
 
 Therefore, this instruction is actually comparing the first parameter passed to read_six_numbers with the value 0x1.
 ```
 
 ```
+Since the first element of tab_six is stored in %edx, any reference to tab_six[0] in the subsequent code would be equivalent to (%edx).
+However, we can see in the code that the first element is actually accessed using the expression tab_six+1,
+which would be equivalent to (%edx + 4) since the size of an integer is 4 bytes.
+This implies that the first element of tab_six is actually located at %edx + 4.
 
-  iVar1 = 1;
-  do {
-    if (aiStack_20[iVar1 + 1] != (iVar1 + 1) * aiStack_20[iVar1]) {
+Therefore, any reference to tab_six[i] in the subsequent code would be equivalent to (%edx + 4 + i*4).
+Since i starts at 1, the indexing of the array starts at 1 in this assembly code.
+
+The reason is that the first element of the array is accessed using %edx,
+which is a register that stores a memory address.
+The instruction movl (%edx),%eax is used to move the contents of the first element of the array into the %eax register. 
+This implies that the first element of the array is located at %edx.
+
+Then, the instruction lea 0x4(%edx),%eax is used to calculate the address of the 2nd element of the array, which is %edx + 4.
+This means that the 2nd element of the array is located 4 bytes away from the first element.
+
+Therefore, the indexing of the array starts at 1
+```
+
+```
+while syntax:
+
+  i = 1;
+  do 
+  {
+    if (array[i + 1] != (i + 1) * array[i])
       explode_bomb();
-    }
     
-for (int i = 1; i <= 5; i++) {
-        if (tab_six[i+1] != (i+1) * tab_six[i]) {
+    i = i + 1;
+  } while (i < 6);
+
+for syntax:
+
+ for (int i = 1; i <= 5; i++) 
+ {
+        if (tab_six[i+1] != (i+1) * tab_six[i])
             explode_bomb();
-        }
+        
+  }
 ``` 
+
+RECAP:
+```
+laurie@BornToSecHackMe:~$ cat payload
+Public speaking is very easy.
+1 2
+```
+```
+1+1 * t[1] ==> 2 * 1  = 2   = t[1+1] 
+2+1 * t[2] ==> 3 * 2  = 6   = t[2+1]
+3+1 * t[3] ==> 4 * 6  = 24  = t[3+1]
+4+1 * t[4] ==> 5 * 24 = 120 = t[4+1]
+5+1 * t[5] ==> 6 * 120= 720 = t[5+1]
+```
+
+
+```
+laurie@BornToSecHackMe:~$ echo "1 2 6 24 120 720" >> payload
+laurie@BornToSecHackMe:~$ ./bomb payload
+Welcome this is my little bomb !!!! You have 6 stages with
+only one life good luck !! Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
