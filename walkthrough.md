@@ -148,11 +148,12 @@ Phase 1 defused. How about the next one?
 The instruction cmpl $0x1,-0x18(%ebp) is comparing the value at memory address %ebp-0x18 with 0x1.
 This value is one of the parameters passed to the function read_six_numbers.
 
-Therefore, this instruction is actually comparing the first parameter passed to read_six_numbers with the value 0x1.
+Therefore, this instruction is actually comparing the 1st parameter passed to read_six_numbers with the value 0x1.
 ```
 
 ```
-Since the first element of tab_six is stored in %edx, any reference to tab_six[0] in the subsequent code would be equivalent to (%edx).
+Since the first element of tab_six is stored in %edx,
+any reference to tab_six[0] in the subsequent code would be equivalent to (%edx).
 However, we can see in the code that the first element is actually accessed using the expression tab_six+1,
 which would be equivalent to (%edx + 4) since the size of an integer is 4 bytes.
 This implies that the first element of tab_six is actually located at %edx + 4.
@@ -162,10 +163,12 @@ Since i starts at 1, the indexing of the array starts at 1 in this assembly code
 
 The reason is that the first element of the array is accessed using %edx,
 which is a register that stores a memory address.
-The instruction movl (%edx),%eax is used to move the contents of the first element of the array into the %eax register. 
+The instruction movl (%edx),%eax is used to move the contents of the first element 
+of the array into the %eax register. 
 This implies that the first element of the array is located at %edx.
 
-Then, the instruction lea 0x4(%edx),%eax is used to calculate the address of the 2nd element of the array, which is %edx + 4.
+Then, the instruction lea 0x4(%edx),%eax is used to calculate 
+the address of the 2nd element of the array, which is %edx + 4.
 This means that the 2nd element of the array is located 4 bytes away from the first element.
 
 Therefore, the indexing of the array starts at 1
