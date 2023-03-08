@@ -29,6 +29,31 @@ for IP in 10.12.100.{1..50} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordProm
 for IP in 10.12.100.{50..100} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordPrompts=1 laurie@$IP ; done
 for IP in 10.12.100.{100..200} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordPrompts=1 laurie@$IP ; done
 ```
+[UPDATE]
+
+a faster and much easier soloution is to check the ARP cache table
+
+```
+arp -a
+
+? (10.12.100.135) at (incomplete) on en0 ifscope [ethernet]
+```
+
+```
+When a virtual machine (VM) is running on a host system,
+it is assigned a virtual MAC address that is different from the host's physical MAC address. 
+This virtual MAC address is used by the VM to communicate with other devices on the network.
+
+When the VM sends packets to other devices, the host system's network interface card (NIC) forwards those packets on behalf of the VM. 
+In order to do this, the host needs to know the MAC address of the destination device.
+The host obtains this information by sending an ARP request to the network, 
+asking for the MAC address of the device with the corresponding IP address.
+
+When the host receives the ARP response with the MAC address, 
+it stores this information in its ARP cache. Therefore, when you run the "arp -a" command on the host system,
+you will see the MAC addresses of both physical and virtual devices that have communicated with the host system recently.
+```
+
 ```
 laurie@BornToSecHackMe:~$ ls
 bomb  README
