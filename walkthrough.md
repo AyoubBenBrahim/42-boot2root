@@ -204,9 +204,9 @@ This means that the 2nd element of the array is located 4 bytes away from the fi
 Therefore, the indexing of the array starts at 1
 ```
 
-```
-while syntax:
 
+while syntax:
+```
   i = 1;
   do 
   {
@@ -215,9 +215,9 @@ while syntax:
     
     i = i + 1;
   } while (i < 6);
-
+```
 for syntax:
-
+```
  for (int i = 1; i <= 5; i++) 
  {
         if (tab_six[i+1] != (i+1) * tab_six[i])
