@@ -480,28 +480,40 @@ At this point, the encoding is complete, and control is returned to the calling 
 ```
 
 ```c
-void phase_5() 
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+void phase(char *input)
 {
-  read_input(stdin, &str);
-  if (strlen(str) != 6) 
-    explode_bomb();
-  
-  else 
-  {
-    int i = 0;
-    char *indexMe = "isrveawhobpnutfg";
-    
-    do {
-      str[i] = indexMe[str[i] & 0xf];
-      i++;
-    } while (edx <= 5);
-    
-    if strcmp(str, "giants" != 0) 
-      explode_bomb();
-    
-  }
-  return;
+    char *indexer = "isrveawhobpnutfg";
+
+    if (strlen(input) != 6)
+    {
+        printf("explode_bomb();");
+        exit(0);
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+      input[i] = indexer[input[i] & 0xf];
+    }
+
+    if (strcmp(input, "giants") != 0)
+    {
+        printf("explode_bomb();");
+        exit(0);
+    }
+    else
+        printf("OKKKKK");
 }
+
+int main(int ac, char **av)
+{
+    phase(av[1]);
+    return 0;
+}
+
 ```
 
 ```c
