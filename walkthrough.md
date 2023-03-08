@@ -239,7 +239,7 @@ Public speaking is very easy.
 4+1 * t[4] ==> 5 * 24 = 120 = t[4+1]
 5+1 * t[5] ==> 6 * 120= 720 = t[5+1]
 ```
-
+obviously This is a factorial series
 
 ```
 laurie@BornToSecHackMe:~$ echo "1 2 6 24 120 720" >> payload
@@ -249,6 +249,7 @@ only one life good luck !! Have a nice day!
 Phase 1 defused. How about the next one?
 That's number 2.  Keep going!
 ```
+
 ## Phase_3
 
 ```
@@ -431,7 +432,7 @@ int main()
     res{8} =  34
     res{9} =  55
 ```
-
+Fibonacci sequense
 ```
 laurie@BornToSecHackMe:~$ echo "9" >> payload
 
@@ -449,10 +450,26 @@ So you got that one.  Try this one.
 
 
 
+0x08048d4f <+35>:	lea    -0x8(%ebp),%ecx
+   0x08048d52 <+38>:	mov    $0x804b220,%esi
+   0x08048d57 <+43>:	mov    (%edx,%ebx,1),%al
+   0x08048d5a <+46>:	and    $0xf,%al
+   0x08048d5c <+48>:	movsbl %al,%eax
+   0x08048d5f <+51>:	mov    (%eax,%esi,1),%al
+   0x08048d62 <+54>:	mov    %al,(%edx,%ecx,1)
+   0x08048d65 <+57>:	inc    %edx
+   0x08048d66 <+58>:	cmp    $0x5,%edx
 
 
+The given assembly code is a block of code that takes a 6-byte input and encodes it using a substitution cipher.
 
+At the beginning of the code, the address 0x804b220 is loaded into the register %esi, which contains the string "isrveawhobpnutfg". This string serves as a lookup table for the substitution cipher.
 
+The input string is located at %ebp-0x8, and its characters are accessed sequentially using a loop that runs 6 times. The variable %edx holds the current loop index, starting at 0, and %ebx is used to calculate the memory address of the current character in the input string.
+
+The current character is loaded into %al, and the lower 4 bits are extracted using the and instruction with a bitmask of 0xf. This value is then used as an index into the substitution table %esi to get the encoded character. The encoded character is loaded into %al, and then stored in the output string located at %ebp-0x8 with an offset of %edx bytes from the beginning of the string.
+
+After each character is encoded and stored, %edx is incremented, and the loop continues until %edx reaches 6. At this point, the encoding is complete, and control is returned to the calling function.
 
 
 
