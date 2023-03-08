@@ -103,7 +103,7 @@ bomb: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV)
 0x0804952c  phase_defused
 ```
 
-```
+```c
 main()
 {
   initialize_bomb();
@@ -206,7 +206,7 @@ Therefore, the indexing of the array starts at 1
 
 
 while syntax:
-```
+```c
   i = 1;
   do 
   {
@@ -217,7 +217,7 @@ while syntax:
   } while (i < 6);
 ```
 for syntax:
-```
+```c
  for (int i = 1; i <= 5; i++) 
  {
         if (tab_six[i+1] != (i+1) * tab_six[i])
@@ -252,7 +252,7 @@ That's number 2.  Keep going!
 
 ## Phase_3
 
-```
+```c
 void phase_3 (char *param_1)
 {
   int iVar1;
@@ -352,7 +352,7 @@ Halfway there!
 
 ## Phase_4
 
-```
+```c
 void phase_4(char *param_1)
 {
   int ret;
@@ -479,6 +479,26 @@ After each character is encoded and stored, %edx is incremented, and the loop co
 At this point, the encoding is complete, and control is returned to the calling function.
 ```
 
+```c
+void phase_5() {
+  read_input(stdin, &str);
+  if (strlen(str) != 6) {
+    explode_bomb();
+  }
+  else {
+    int i = 0;
+    char *indexMe = "isrveawhobpnutfg";
+    do {
+      str[i] = indexMe[str[i] & 0xf];
+      i++;
+    } while (edx <= 5);
+    if strcmp(str, "giants" != 0) {
+      explode_bomb();
+    }
+  }
+  return;
+}
+```
 
 
 
