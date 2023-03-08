@@ -480,28 +480,50 @@ At this point, the encoding is complete, and control is returned to the calling 
 ```
 
 ```c
-void phase_5() {
+void phase_5() 
+{
   read_input(stdin, &str);
-  if (strlen(str) != 6) {
+  if (strlen(str) != 6) 
     explode_bomb();
-  }
-  else {
+  
+  else 
+  {
     int i = 0;
     char *indexMe = "isrveawhobpnutfg";
+    
     do {
       str[i] = indexMe[str[i] & 0xf];
       i++;
     } while (edx <= 5);
-    if strcmp(str, "giants" != 0) {
+    
+    if strcmp(str, "giants" != 0) 
       explode_bomb();
-    }
+    
   }
   return;
 }
 ```
 
+```c
+void phase_5(char* input) 
+{
+    int i, j;
+    char c, array[6] = "isrvea";
 
+    if (strlen(input) != 6)
+        explode_bomb();
 
+    for (i = 0, j = 0; i < 6; i++, j++) 
+    {
+        c = input[i] & 0xF;
+        array[j] = "isrveawhobpnutfg"[c];
+    }
+
+    if (strcmp(array, "giants") != 0)
+        explode_bomb();
+}
+
+```
 
 
 
