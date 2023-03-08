@@ -1,5 +1,7 @@
 
 
+**Part4: we'll need to reverse engineer a binary [bomb] to get a sequence of passwords
+
 ```
 nmap 10.12.100.0/24
 
