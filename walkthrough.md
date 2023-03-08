@@ -486,34 +486,68 @@ At this point, the encoding is complete, and control is returned to the calling 
 
 void phase(char *input)
 {
-    char *indexer = "isrveawhobpnutfg";
+    char *indexer = "isrveawhobpnutfg";//16
+	 char curr_char;
 
-    if (strlen(input) != 6)
-    {
-        printf("explode_bomb();");
-        exit(0);
-    }
+	if (strlen(input) != 6)
+ 	{
+     	printf("explode_bomb();");
+     	exit(0);
+ 	}
 
     for (int i = 0; i < 6; i++)
     {
-      input[i] = indexer[input[i] & 0xf];
-    }
+		curr_char = *(input + i) & 0xf;
 
-    if (strcmp(input, "giants") != 0)
+		printf("input[i] = %d|%c\ninput[i] & 0xf = %d\nindexer[curr_char] = 	[%c]\n", input[i],input[i], curr_char, indexer[curr_char]);
+
+		input[i] = indexer[curr_char];
+
+		printf("--------------\n");
+	}
+
+	if (strcmp(input, "giants") != 0)
     {
-        printf("explode_bomb();");
-        exit(0);
-    }
-    else
-        printf("OKKKKK");
+    	printf("explode_bomb();");
+   		exit(0);
+	}
+	else
+ 		printf("OKKKKK");
 }
 
-int main(int ac, char **av)
-{
-    phase(av[1]);
-    return 0;
-}
+===output
 
+0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15                     
+i | s | r | v | e | a | w | h | o | b | p  | n  | u  | t  | f  | g
+
+
+./a.out opukma
+
+input[i] = 111|o                    111 = 1101111 & 1111 = 0001111 = 15      
+input[i] & 0xf = 15
+indexer[curr_char] = 	[g]
+--------------
+input[i] = 112|p                    112 = 1110000 & 1111 = 0000000 = 0 
+input[i] & 0xf = 0
+indexer[curr_char] = 	[i]
+--------------
+input[i] = 117|u                    117 = 1110101 & 1111 = 0000101 = 5
+input[i] & 0xf = 5
+indexer[curr_char] = 	[a]
+--------------
+input[i] = 107|k                    107 = 1101011 & 1111 = 0001011 = 11
+input[i] & 0xf = 11
+indexer[curr_char] = 	[n]
+--------------
+input[i] = 109|m
+input[i] & 0xf = 13
+indexer[curr_char] = 	[t]
+--------------
+input[i] = 97|a
+input[i] & 0xf = 1
+indexer[curr_char] = 	[s]
+--------------
+OKKKKK%
 ```
 
 ```c
