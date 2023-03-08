@@ -1,6 +1,6 @@
 
 
-**Part4: we'll need to reverse engineer a binary [bomb] to get a sequence of passwords**
+# Part4: we'll need to reverse engineer a binary [bomb] to get a sequence of passwords
 
 ```
 nmap 10.12.100.0/24
@@ -135,6 +135,7 @@ main()
   return 0;
 }
 ```
+## Phase_1
 ```
 (gdb) disass phase_1
 Dump of assembler code for function phase_1:
@@ -155,6 +156,8 @@ Welcome this is my little bomb !!!! You have 6 stages with
 only one life good luck !! Have a nice day!
 Phase 1 defused. How about the next one?
 ```
+
+## Phase_2
 
 ```
 (gdb) disass phase_2
@@ -246,10 +249,10 @@ only one life good luck !! Have a nice day!
 Phase 1 defused. How about the next one?
 That's number 2.  Keep going!
 ```
+## Phase_3
 
 ```
-void phase_3(char *param_1)
-
+void phase_3 (char *param_1)
 {
   int iVar1;
   char cVar2;
@@ -346,6 +349,8 @@ Halfway there!
 
 ```
 
+## Phase_4
+
 ```
 void phase_4(char *param_1)
 {
@@ -438,6 +443,8 @@ That's number 2.  Keep going!
 Halfway there!
 So you got that one.  Try this one.
 ```
+
+## Phase_5
 
 
 
