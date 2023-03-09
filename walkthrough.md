@@ -600,7 +600,19 @@ int main()
 }
 ```
 
-
+```
+➜  Desktop gcc reverse_phase_5.c -o reverse_phase_5
+➜  Desktop ./reverse_phase_5
+opekma%
+```
+```
+laurie@BornToSecHackMe:~$ cat payload
+Public speaking is very easy.
+1 2 6 24 120 720
+7 b 524
+9
+opekma
+```
 
 
 
