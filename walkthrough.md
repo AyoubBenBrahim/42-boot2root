@@ -31,15 +31,6 @@ for IP in 10.12.100.{1..50} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordProm
 for IP in 10.12.100.{50..100} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordPrompts=1 laurie@$IP ; done
 for IP in 10.12.100.{100..200} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordPrompts=1 laurie@$IP ; done
 ```
-[UPDATE]
-
-a faster and much easier soloution is to check the ARP cache table
-
-```
-arp -a
-
-? (10.12.100.135) at (incomplete) on en0 ifscope [ethernet]
-```
 
 ```
 When a virtual machine (VM) is running on a host system,
