@@ -530,12 +530,12 @@ indexer[curr_char] = 	[g]
 input[i] = 112|p                    112 = 1110000 & 1111 = 0000000 = 0 
 input[i] & 0xf = 0
 indexer[curr_char] = 	[i]
---------------
-input[i] = 117|u                    117 = 1110101 & 1111 = 0000101 = 5
+-------------- 
+input[i] = 117|u                    117 = 1110101 & 1111 = 0000101 = 5             111 => 7 << 4 => 1110000 & 5 => 1110101 = 117 (97|a -> 122|z)
 input[i] & 0xf = 5
 indexer[curr_char] = 	[a]
 --------------
-input[i] = 107|k                    107 = 1101011 & 1111 = 0001011 = 11
+input[i] = 107|k                    107 = 1101011 & 1111 = 0001011 = 11            110 = 6 << 4 = 1100000 & 11 = 1101011    OR 0001011 = 1101011
 input[i] & 0xf = 11
 indexer[curr_char] = 	[n]
 --------------
@@ -547,31 +547,9 @@ input[i] = 97|a
 input[i] & 0xf = 1
 indexer[curr_char] = 	[s]
 --------------
+
 OKKKKK%
 ```
-
-```c
-void phase_5(char* input) 
-{
-    int i, j;
-    char c, array[6] = "isrvea";
-
-    if (strlen(input) != 6)
-        explode_bomb();
-
-    for (i = 0, j = 0; i < 6; i++, j++) 
-    {
-        c = input[i] & 0xF;
-        array[j] = "isrveawhobpnutfg"[c];
-    }
-
-    if (strcmp(array, "giants") != 0)
-        explode_bomb();
-}
-
-```
-
-
 
 
 
