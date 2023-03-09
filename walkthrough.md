@@ -484,19 +484,19 @@ At this point, the encoding is complete, and control is returned to the calling 
 #include<string.h>
 #include<stdlib.h>
 
-void phase(char *input)
+void phase_5(char *input)
 {
-    char *indexer = "isrveawhobpnutfg";//16
-	 char curr_char;
+	char *indexer = "isrveawhobpnutfg";
+	char curr_char;
 
 	if (strlen(input) != 6)
  	{
-     	printf("explode_bomb();");
-     	exit(0);
+     		printf("explode_bomb();");
+     		exit(0);
  	}
 
-    for (int i = 0; i < 6; i++)
-    {
+    	for (int i = 0; i < 6; i++)
+    	{
 		curr_char = *(input + i) & 0xf;
 
 		printf("input[i] = %d|%c\ninput[i] & 0xf = %d\nindexer[curr_char] = 	[%c]\n", input[i],input[i], curr_char, indexer[curr_char]);
@@ -507,17 +507,23 @@ void phase(char *input)
 	}
 
 	if (strcmp(input, "giants") != 0)
-    {
-    	printf("explode_bomb();");
+    	{
+    		printf("explode_bomb();");
    		exit(0);
 	}
 	else
- 		printf("OKKKKK");
+ 		printf("OK");
 }
+
+int main(int ac, char **av)
+{
+	phase_5(av[1]);
+}
+
 ```
 
 ```
-===output
+=== Output
 
 0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15                     
 i | s | r | v | e | a | w | h | o | b | p  | n  | u  | t  | f  | g
@@ -550,11 +556,58 @@ input[i] & 0xf = 1
 indexer[curr_char] = 	[s]
 --------------
 
-OKKKKK%
+OK%
 ```
 
+reverse substitution cipher
 
+```c
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
 
+int find_index(char c)
+{
+	int i;
+	char cipher[] = "isrveawhobpnutfg";
+
+	for (i = 0; i < strlen(cipher); i++) 
+	{
+        	if (cipher[i] == c)
+            	    return i;
+        
+    	}
+    	return -1;
+}
+
+void reverse_phase_5()
+{
+	char decipher[] = "giants";
+  
+ 	for (int i = 0; i < 6; i++)
+    	{
+		int index = find_index(decipher[i]);
+		printf ("index =  %d \n", index);
+
+		for (int j = 0; j <= 7; j++)
+		{
+			int shift = j << 4;
+			int bitwise_or = shift | index;
+			if (bitwise_or >= 'a' && bitwise_or <= 'z')
+			{
+				printf ("%c \n", bitwise_or);
+				break;
+			}
+		}
+		printf ("-----\n");
+    }
+}
+
+int main()
+{
+    	reverse_phase_5();
+}
+```
 
 
 
