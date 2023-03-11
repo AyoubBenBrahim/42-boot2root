@@ -32,6 +32,22 @@ for IP in 10.12.100.{50..100} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordPr
 for IP in 10.12.100.{100..200} ; do ssh -o ConnectTimeout=1 -o NumberOfPasswordPrompts=1 laurie@$IP ; done
 ```
 
+UPDTAE
+
+fping is way faster = Ping a range of IP addresses in parallel
+
+```
+docker run -it --rm networkstatic/fping -s -g 10.12.100.1 10.12.100.254 -r 1 | grep alive
+
+
+10.12.100.33 is alive
+10.12.100.43 is alive
+10.12.100.120 is alive
+10.12.100.129 is alive
+10.12.100.135 is alive
+10.12.100.247 is alive
+```
+
 ```
 When a virtual machine (VM) is running on a host system,
 it is assigned a virtual MAC address that is different from the host's physical MAC address. 
