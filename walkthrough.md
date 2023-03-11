@@ -396,26 +396,8 @@ int func4(int input)
 }
 ```
 
-```
+```c
 #include<stdio.h>
-
-int func4(int input)
-{
-  int i;
-  int ret;
-  
-  if (input < 2)
-    ret = 1;
-  
-  else 
-  {
-    i = func4(input - 1);
-    ret = func4(input - 2);
-    ret = ret + i;
-  }
- 
-  return ret;
-}
 
 int main()
 {
@@ -453,8 +435,6 @@ So you got that one.  Try this one.
 ```
 
 ## Phase_5
-
-
 
 ```
    0x08048d4f <+35>:	lea    -0x8(%ebp),%ecx
@@ -529,7 +509,7 @@ int main(int ac, char **av)
 
 ```
 
-```
+```c
 === Output
 
 0   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15                     
