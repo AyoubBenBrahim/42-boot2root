@@ -48,6 +48,7 @@ docker run -it --rm networkstatic/fping -s -g 10.12.100.1 10.12.100.254 -r 1 | g
 10.12.100.247 is alive
 ```
 `docker run -it --rm networkstatic/fping -s -g 10.12.100.0/24 -r 1 | grep alive`
+
 `docker run -it --rm networkstatic/fping -s -g 10.12.100.0/24 -r 1 | grep alive | awk '{print $1}'`
 ```
 When a virtual machine (VM) is running on a host system,
