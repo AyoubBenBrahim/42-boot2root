@@ -668,8 +668,82 @@ If these values are not equal, jumps to the explode_bomb function.
 
 ```
 
+```
+(gdb) b main
+Breakpoint 1 at 0x80489b7: file bomb.c, line 36.
+(gdb) run
 
 
+(gdb) define loop_nodes
+>set $i = 0
+>set $next = $arg0
+>while ($i < 6)
+ >x/3wx $next
+ >set $next = *(unsigned int*)($next+8)
+ >set $i= $i+1
+ >end
+>end
+
+(gdb) loop_nodes 0x804b26c
+
+0x804b26c <node1>:	0x000000fd	0x00000001	0x0804b260
+0x804b260 <node2>:	0x000002d5	0x00000002	0x0804b254
+0x804b254 <node3>:	0x0000012d	0x00000003	0x0804b248
+0x804b248 <node4>:	0x000003e5	0x00000004	0x0804b23c
+0x804b23c <node5>:	0x000000d4	0x00000005	0x0804b230
+0x804b230 <node6>:	0x000001b0	0x00000006	0x00000000
+
+```
+better formating
+```
+(gdb) define loop_nodes
+>set $i = 0
+>set $next = $arg0
+>while($i < 6)
+ >printf "%#x  %3d  %3d  %#x\n" , $next , *$next, *($next+4), *($next+8)
+ >set $next = *(unsigned int *)($next+8)
+ >set $i = $i + 1
+ >end
+>end
+(gdb) loop_nodes 0x804b26c
+0x804b26c  253    1  0x804b260
+0x804b260  725    2  0x804b254
+0x804b254  301    3  0x804b248
+0x804b248  997    4  0x804b23c
+0x804b23c  212    5  0x804b230
+0x804b230  432    6  0
+```
+
+the order in which the values would be in decreasing order:
+```
+997 | 725 | 432 | 301 | 253 | 212
+ 4  |  2  |  6  |  3  |  1  |  5
+```
+
+```
+laurie@BornToSecHackMe:~$ cat payload
+Public speaking is very easy.
+1 2 6 24 120 720
+7 b 524
+9
+opekma
+4 2 6 3 1 5
+laurie@BornToSecHackMe:~$ ./bomb payload
+Welcome this is my little bomb !!!! You have 6 stages with
+only one life good luck !! Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+So you got that one.  Try this one.
+Good work!  On to the next...
+Congratulations! You've defused the bomb!
+```
+
+combining the results of the phases
+
+```
+thor:Publicspeakingisveryeasy.126241207201b2149opekmq426135
+```
 
 
 
