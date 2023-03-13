@@ -612,10 +612,61 @@ Public speaking is very easy.
 opekma
 ```
 
+## Phase_6
+```
+0x08048dae <+22>:	lea    -0x18(%ebp),%eax
+0x08048db3 <+27>:	call   0x8048fd8 <read_six_numbers>
+
+0x08048db3 <+27>: The function calls the read_six_numbers function, 
+which reads in six integers from standard input and stores them in the array located at [ebp-0x18].
+```
+
+```
+0x08048dc0 <+40>:	lea    -0x18(%ebp),%eax
+0x08048dc3 <+43>:	mov    (%eax,%edi,4),%eax
+0x08048dc6 <+46>:	dec    %eax
+0x08048dc7 <+47>:	cmp    $0x5,%eax
+0x08048dca <+50>:	jbe    0x8048dd1 <phase_6+57>
+0x08048dcc <+52>:	call   0x80494fc <explode_bomb>
 
 
+compares the value in eax to 5.
+0x08048dca <+50>: If the value in eax is less than or equal to 5, 
+the function jumps to 0x8048dd1 to continue execution. Otherwise, it calls the explode_bomb function and terminates.
+```
+
+```
+
+  0x08048dd9 <+65>:	lea    0x0(,%edi,4),%eax
+  0x08048de0 <+72>:	mov    %eax,-0x38(%ebp)
+  0x08048de3 <+75>:	lea    -0x18(%ebp),%esi
+  0x08048de6 <+78>:	mov    -0x38(%ebp),%edx
+  0x08048de9 <+81>:	mov    (%edx,%esi,1),%eax
+  0x08048dec <+84>:	cmp    (%esi,%ebx,4),%eax
+  0x08048def <+87>:	jne    0x8048df6 <phase_6+94>
+  0x08048df1 <+89>:	call   0x80494fc <explode_bomb>
+   
+<+65>:	lea    eax,[edi*4+0x0]  ==> eax = edi * 4 + 0
+
+This instruction is used to calculate an index into an array, where each element of the array is 4 bytes in size.
+By multiplying the index (in "edi") by 4, we obtain the offset (in bytes) from the start of the array to the desired element.
+Storing this offset in "eax" allows us to use it to access the desired element later in the program.
+
+The array stores integers, which are typically 4 bytes (32 bits) in size. Therefore,
+each element of the array takes up 4 bytes of memory. To access the i-th element of the array, 
+the program needs to calculate the memory address of the i-th element. Since each element takes up 4 bytes, 
+the address of the i-th element is the base address of the array plus i times 4 (i.e., the number of elements before it,
+multiplied by the size of each element).
+
+0x08048dec <+84>:   cmp    eax,DWORD PTR [esi+ebx*4]
+0x08048def <+87>:   jne    0x8048df6 <phase_6+94>
+
+Here, the instruction cmp compares the value in eax (which was loaded from the (edi+0)-th index of the input array)
+with the value at the address [esi+ebx*4] (which corresponds to the (edi+1)-th index of the input array).
+If these values are not equal, jumps to the explode_bomb function.
 
 
+```
 
 
 
