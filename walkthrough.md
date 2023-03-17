@@ -753,7 +753,7 @@ define sorted_nodes
     set $i = $i + 1
   end
 
-  #BUBLE SORT
+  #BUBBLE SORT
 
 set $i = 0
   while ($i < 6)
