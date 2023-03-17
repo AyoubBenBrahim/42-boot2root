@@ -743,7 +743,7 @@ $44 = 0x804b230
 $45 = 0x804b230
 ```
 gdb macro
-```
+```shell
 define sorted_nodes
   set $nodes = (int (*)[2])$arg0
   set $i = 0
