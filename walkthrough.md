@@ -791,7 +791,6 @@ end
 ```
 output
 ```
-
 (gdb) r
 The program being debugged has been started already.
 Start it from the beginning? (y or n) y
@@ -802,7 +801,7 @@ Starting program: /home/laurie/bomb
 997 725 432 301 253 212
   4   2   6   3   1   5
 ```
-
+```
 laurie@BornToSecHackMe:~$ cat payload
 Public speaking is very easy.
 1 2 6 24 120 720
@@ -826,6 +825,9 @@ combining the results of the phases
 ```
 thor:Publicspeakingisveryeasy.126241207201b2149opekmq426135
 ```
+
+ps: try all the combinations of opekm...
+and check the subject for the reordring of th pwd
 
 
 
