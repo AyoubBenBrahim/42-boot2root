@@ -720,7 +720,87 @@ the order in which the values would be in decreasing order:
  4  |  2  |  6  |  3  |  1  |  5
 ```
 
+i worked on a better formated macro
+
 ```
+notice the pattern
+
+(gdb) p/x 0x804b26c-(12*0)
+$46 = 0x804b26c
+(gdb) p/x &node1
+$47 = 0x804b26c
+
+(gdb) p/x 0x804b26c-(12*4)
+$43 = 0x804b23c
+(gdb) p/x &node5
+$42 = 0x804b23c
+
+(gdb) p/x 0x804b26c-(12*5)
+$44 = 0x804b230
+(gdb) p/x &node6
+$45 = 0x804b230
+```
+gdb macro
+```
+define sorted_nodes
+  set $nodes = (int (*)[2])$arg0
+  set $i = 0
+  while ($i < 6)
+    set $nodes[$i+1][0] = *(int *)($arg0 - (($i + 1) * 12))
+    set $nodes[$i+1][1] = *(int *)($arg0 - (($i + 1) * 12) + 4)
+    set $i = $i + 1
+  end
+
+  #BUBLE SORT
+
+set $i = 0
+  while ($i < 6)
+    set $j = 0
+    while ($j < 6 - $i - 1)
+      if ($nodes[$j+1][0] > $nodes[$j][0])
+        set $temp = $nodes[$j][0]
+        set $nodes[$j][0] = $nodes[$j+1][0]
+        set $nodes[$j+1][0] = $temp
+        
+        set $temp = $nodes[$j][1]
+        set $nodes[$j][1] = $nodes[$j+1][1]
+        set $nodes[$j+1][1] = $temp
+      end
+      set $j = $j + 1
+    end
+    set $i = $i + 1
+  end
+
+#print 2d array
+
+set $i = 0
+  while ($i < 6)
+    printf "%3d ", $nodes[$i][0]
+    set $i = $i + 1
+  end
+  printf "\n"
+  set $i = 0
+  while ($i < 6)
+    printf "%3d ", $nodes[$i][1]
+    set $i = $i + 1
+  end
+  printf "\n"
+end
+```
+output
+```
+
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /home/laurie/bomb
+
+(gdb) sorted_nodes 0x804b26c
+
+997 725 432 301 253 212
+  4   2   6   3   1   5
+```
+
 laurie@BornToSecHackMe:~$ cat payload
 Public speaking is very easy.
 1 2 6 24 120 720
